@@ -19,9 +19,7 @@ int main(){
     int N, M;
     cin >> N >> M;
 
-    map<int, vector<city>> data;
-    vector<city> input_cities;
-    vector<city> sorting_cities;
+    map<int, vector<city> > data;
 
     for (int i = 0; i < M; i++) {
         int P, Y;
@@ -30,28 +28,15 @@ int main(){
         city.prefecture = P;
         city.year = Y;
         city.index = i;
-        input_cities.push_back(city);
+        data[P].push_back(city);
     }
     cout << "------------\ninputed data\n";
-    for (int i = 0; i < input_cities.size(); i++) {
-        city & element = input_cities[i];
-        cout << element.prefecture << "," << element.year << "\n";
-    }
-    cout << "------------\noutputed data\n";
-    sort(input_cities.begin(), input_cities.end(), prefecture_sorter);
-    int assign_id = 1;
-    int current_prefecture = 1;
-    for (int i = 0; i < input_cities.size(); i++) {
-        city & element = input_cities[i];
-        if (current_prefecture != element.prefecture) {
-            assign_id = 1;
+    for (int i = 1; i <= N; i++) {
+        cout << "prefecture = " << i << "\n";
+        for (int j = 0; j < data[i].size(); j++) {
+            city & element = data[i][j];
+            cout << element.year<< " , " << element.index << "\n";
         }
-        element.id = assign_id;
-        assign_id++;
-    }
-    for (int i = 0; i < input_cities.size(); i++) {
-        city & element = input_cities[i];
-        cout << element.prefecture << "," << element.year << "," << element.index << "," << element.id << "\n";
     }
     return 0;
 }
