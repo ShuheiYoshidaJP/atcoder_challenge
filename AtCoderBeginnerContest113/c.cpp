@@ -20,6 +20,7 @@ int main(){
     cin >> N >> M;
 
     map<int, vector<city> > data;
+    vector<city> ans;
 
     for (int i = 0; i < M; i++) {
         int P, Y;
@@ -30,13 +31,18 @@ int main(){
         city.index = i;
         data[P].push_back(city);
     }
-    cout << "------------\ninputed data\n";
     for (int i = 1; i <= N; i++) {
         cout << "prefecture = " << i << "\n";
+        sort(data[i].begin(), data[i].end(), year_sorter);
         for (int j = 0; j < data[i].size(); j++) {
-            city & element = data[i][j];
-            cout << element.year<< " , " << element.index << "\n";
+            data[i][j].id = j+1;
+            ans.push_back(data[i][j]);
         }
+    }
+    sort(ans.begin(), ans.end(), index_sorter);
+    for (int i = 0; i < ans.size(); i++) {
+        city & element = ans[i];
+        cout << element.prefecture << "," << element.year << "," << element.index << "," << element.id << "\n";
     }
     return 0;
 }
