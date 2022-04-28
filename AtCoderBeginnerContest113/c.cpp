@@ -1,6 +1,8 @@
 #include <map>
 #include <iostream>
 #include <vector>
+#include <iomanip>
+#include <algorithm>
 using namespace std;
 
 struct city {
@@ -10,7 +12,6 @@ struct city {
     int id;
 };
 
-bool prefecture_sorter(city a, city b) { return a.prefecture < b.prefecture; }
 bool year_sorter(city a, city b) { return a.year < b.year; }
 bool index_sorter(city a, city b) { return a.index < b.index; }
 
@@ -32,7 +33,6 @@ int main(){
         data[P].push_back(city);
     }
     for (int i = 1; i <= N; i++) {
-        cout << "prefecture = " << i << "\n";
         sort(data[i].begin(), data[i].end(), year_sorter);
         for (int j = 0; j < data[i].size(); j++) {
             data[i][j].id = j+1;
@@ -42,7 +42,7 @@ int main(){
     sort(ans.begin(), ans.end(), index_sorter);
     for (int i = 0; i < ans.size(); i++) {
         city & element = ans[i];
-        cout << element.prefecture << "," << element.year << "," << element.index << "," << element.id << "\n";
+        cout << setfill('0') << setw(6) << element.prefecture << setfill('0') << setw(6) << element.id << endl;
     }
     return 0;
 }
