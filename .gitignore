@@ -1,2 +1,4 @@
 *.out
+*_ans.cpp
+*_test.cpp
 *.dSYM
